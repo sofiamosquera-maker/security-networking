@@ -28,4 +28,4 @@ jobs:
       - name: Deploy files
         run: |
           oc project sofia-mosquera-dev
-          oc apply -f networking.yaml
+          oc apply -f ./
