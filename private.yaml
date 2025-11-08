@@ -17,3 +17,23 @@ spec:
       ports:
         - protocol: TCP
           port: 3000  # Puerto de destino en micro-b (ajústalo según tu app)
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-gateway-to-backend
+  namespace: sofia-mosquera-dev
+spec:
+  podSelector:
+    matchLabels:
+      app: backend-mservice  # Aplica esta política a los pods etiquetados como micro-b
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: gateway-mservice  # Permite solo el tráfico proveniente de micro-a
+      ports:
+        - protocol: TCP
+          port: 3000  # Puerto de destino en micro-b (ajústalo según tu app)
