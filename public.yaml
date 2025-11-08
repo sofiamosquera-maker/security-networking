@@ -28,7 +28,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: mi-app-backend
+      app: backend-mservice
   policyTypes:
     - Ingress
   ingress:
