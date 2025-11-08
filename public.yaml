@@ -38,4 +38,6 @@ spec:
               network.openshift.io/policy-group: ingress
       ports:
         - protocol: TCP
+          port: 4000  # Puerto de destino en micro-b (ajústalo según tu app)
+        - protocol: TCP
           port: 3000  # Puerto de destino en micro-b (ajústalo según tu app)
