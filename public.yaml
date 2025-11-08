@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-ingress-to-micro-a
+  name: allow-ingress-to-front
   namespace: sofia-mosquera-dev
 spec:
   podSelector:
     matchLabels:
-      app: mi-app  # Aplica esta política a los pods etiquetados como micro-b
+      app: mi-app  # Aplica esta política a los pods etiquetados como mi-app
   policyTypes:
     - Ingress
   ingress:
@@ -14,6 +14,18 @@ spec:
         - namespaceSelector:
             matchLabels:
               network.openshift.io/policy-group: ingress
+          podSelector:
+            matchLabels:
+              app: mi-app
+        - namespaceSelector:
+            matchLabels:
+              network.openshift.io/policy-group: ingress
+          podSelector:
+            matchLabels:
+              app: html-app
       ports:
         - protocol: TCP
-          port: 3000  # Puerto de destino en micro-b (ajústalo según tu app)
+          port: 3000
+        - protocol: TCP
+          port: 80
+
