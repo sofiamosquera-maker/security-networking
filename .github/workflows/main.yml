@@ -28,4 +28,5 @@ jobs:
       - name: Deploy files
         run: |
           oc project sofia-mosquera-dev
-          oc apply -f ./
+          oc apply -f public.yaml
+          oc apply -f private.yaml
