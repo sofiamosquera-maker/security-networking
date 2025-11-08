@@ -19,4 +19,23 @@ spec:
           port: 8080  # Puerto de destino en micro-b (ajústalo según tu app)
         - protocol: TCP
           port: 80  # Puerto de destino en micro-b (ajústalo según tu app)
-
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-mr2
+  namespace: sofia-mosquera-dev
+spec:
+  podSelector:
+    matchLabels:
+      app: mi-app-backend
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network.openshift.io/policy-group: ingress
+      ports:
+        - protocol: TCP
+          port: 3000  # Puerto de destino en micro-b (ajústalo según tu app)
